@@ -4,7 +4,8 @@ CREATE DATABASE (RUN THIS SCRIPT IN DATABASE "MS SQL")
 --------------------------------------------------------------------------------------------
 Script Purpose:
 	This script creates new database name "DataWarehouse" after checking if it already exists.
-	If the database exists, it is dropped and recreated. 
+	If the database exists, it is dropped and recreated. Additionally the script creates three
+	schemas within the database: 'bronze', 'silver' and 'gold'.
 
 WARNING:
 	Running this script will drop the entire "DataWarehouse" database if it exists.
