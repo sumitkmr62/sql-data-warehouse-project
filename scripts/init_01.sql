@@ -1,6 +1,6 @@
 /*
 --------------------------------------------------------------------------------------------
-CREATE DATABASE (RUN THIS SCRIPT IN DATABASE "postgres")
+CREATE DATABASE (RUN THIS SCRIPT IN DATABASE "MS SQL")
 --------------------------------------------------------------------------------------------
 Script Purpose:
 	This script creates new database name "DataWarehouse" after checking if it already exists.
@@ -12,14 +12,16 @@ WARNING:
 	ensure you have proper backups before running this script.
 */
 
--- Terminate Active Connections
-SELECT 	PG_TERMINATE_BACKEND(pid) 
-FROM 	PG_STAT_ACTIVITY
-WHERE 	DATNAME = 'DataWarehouse'
-AND 	PID <> PG_BACKEND_PID();
+USE master;
+GO
 
 -- Drop Database If Exists
-DROP DATABASE IF EXISTS "DataWarehouse";
+IF EXISTS(SELECT 1 FROM SYS.DATABASES WHERE NAME = 'DataWarehouse');
+BEGIN
+	SET DATABASE DataWarehouse SINGLE_USER WITH IMMEDIATE ROLLBACK;
+	DROP DATABASE DataWarehouse;
+END
+GO
 
 -- Create Database
 CREATE DATABASE "DataWarehouse";
